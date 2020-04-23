@@ -2,6 +2,7 @@ package excel;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Header;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -20,7 +21,7 @@ public class ExcelReader {
 		Row row = sheet.getRow(0);
 		String [] headers = getHeaders(sheet);
 		LastRow=sheet.getLastRowNum();
-		
+		String value;
 		
 		// Empieza en 1 porque los headers son la posicion 0
 		for (int i = 1; i <= LastRow; i++) {
@@ -28,36 +29,20 @@ public class ExcelReader {
 			row= sheet.getRow(i);
 			
 			if(row!=null) {
+				
 				for (int j = 0; j < LastColumn; j++) {
+				
 					Cell cell = row.getCell(j);
-					//System.out.println("J = "+j+"i - "+i+ " VALUE - "+cell);
-					CellType cellType = cell.getCellType();
+					DataFormatter formater = new DataFormatter();
+					value=formater.formatCellValue(cell);
+					object.put(headers[j], value);
 					
-					switch (cellType) {
-					case STRING:
-						object.put(headers[j], cell.getStringCellValue());
-						break;
-					case NUMERIC:
-						object.put(headers[j], cell.getNumericCellValue());
-						break;					
-					case BOOLEAN:
-						object.put(headers[j], cell.getBooleanCellValue());
-						break;
-					case ERROR:
-						object.put(headers[j], cell.getErrorCellValue());
-						break;
-					case _NONE:
-						//object.put(headers[j], cell.getDateCellValue());
-						break;
-					default:
-						break;
-					}
 				}
 			}
-			
+			array.put(object);
 		}
 		
-		return null;
+		return array.toString(1);
 	}
 	
 	

@@ -1,7 +1,5 @@
 package com.vo;
 
-import org.json.JSONPropertyIgnore;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class FlightDescription {

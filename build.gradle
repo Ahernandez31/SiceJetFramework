@@ -35,6 +35,20 @@ dependencies {
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
 	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.0'
     
+    // Selenium
+    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
+	compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+    
+    
+    
+    //TestNG
+    // https://mvnrepository.com/artifact/org.testng/testng
+	//testCompile group: 'org.testng', name: 'testng', version: '7.1.0'
+    // https://mvnrepository.com/artifact/org.testng/testng
+	testCompile group: 'org.testng', name: 'testng', version: '6.11'
+    
+    
+    
     
 }
 

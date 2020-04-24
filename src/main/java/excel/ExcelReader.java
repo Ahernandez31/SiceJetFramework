@@ -1,5 +1,7 @@
 package excel;
 
+import java.io.IOException;
+
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.DataFormatter;
@@ -7,8 +9,12 @@ import org.apache.poi.ss.usermodel.Header;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.data.Constants;
+import com.data.PropertyLoader;
 
 public class ExcelReader {
 	static Workbook wBook = null;
@@ -67,5 +73,20 @@ public class ExcelReader {
 	
 	}
 	
+	public static String getDefaultData() {
+		String json=null;
+		
+		try {
+			wBook = new XSSFWorkbook(PropertyLoader.getProperty(Constants.DATA_FILE));
+			
+			Sheet sheet = wBook.getSheetAt(0);
+			return getDataInJsonFormat(sheet);
+			
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+			return json;
+		}
+	}
 	
 }
